@@ -1,6 +1,6 @@
 ﻿namespace bytebank.Modelos.Conta
 {
-	public class ContaCorrente
+	public class ContaCorrente: IComparable<ContaCorrente>
 	{
 		private int _numero_agencia;
 
@@ -104,15 +104,23 @@
 			TotalDeContasCriadas++;
 		}
 
+        public int CompareTo(ContaCorrente? other)
+        {
+            if (other == null) return 1;
+
+			return this.Numero_agencia.CompareTo(other.Numero_agencia);
+        }
+
 		public override string ToString()
 		{
-
-			return $" === DADOS DA CONTA === \n" +
-				   $"Número da Conta : {this.Conta} \n" +
-				   $"Titular da Conta: {this.Titular.Nome} \n" +
-				   $"CPF do Titular  : {this.Titular.Cpf} \n" +
-				   $"Profissão do Titular: { this.Titular.Profissao}";
-		}
-	}
+			return $"===  Dados da Contas  ===\n" +
+				   $"Número da Conta: {this.Conta}\n" +
+				   $"Número da Agencia: {this.Numero_agencia}\n" +
+				   $"Saldo da Conta: {this.Saldo}\n" +
+				   $"Titular da Conta: {this.Titular.Nome}\n" +
+				   $"CPF da Conta: {this.Titular.Cpf}\n" +
+				   $"Profissão do Titular: {this.Titular.Profissao}\n";
+        }
+    }
 
 }
